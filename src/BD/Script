@@ -1,0 +1,12 @@
+create database examen_segundo_parcial;
+use examen_segundo_parcial;
+
+CREATE TABLE `examen_segundo_parcial`.`datos` (
+  `id` INT NOT NULL,
+  `nombre` VARCHAR(45) NOT NULL,
+  `amaterno` VARCHAR(45) NOT NULL,
+  `datoscol` VARCHAR(45) NULL,
+  `email` VARCHAR(45) NULL,
+  `sexo` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
