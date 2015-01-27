@@ -1,18 +1,20 @@
 package Swing;
 
-import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.util.*;
+import java.awt.event.*;
+import java.awt.*;
+
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import org.jdom2.Attribute;
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.output.Format;
+import org.jdom2.output.XMLOutputter;
 
 public class Formulario implements ActionListener{
     
@@ -85,7 +87,8 @@ public class Formulario implements ActionListener{
         try{
             
             enlaceDB.conectarDB();
-            ResultSet rsSexo = enlaceDB.consulta("call sp_getGenero()"); 
+            ResultSet rsSexo = enlaceDB.consulta("call sp_getGenero()");
+            System.out.println("Traidos Los Generos Correctamente");
             
             while(rsSexo.next()){
                 sexoCombo.addItem(rsSexo.getString("genero"));
@@ -100,8 +103,8 @@ public class Formulario implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         String nombre = nombreField.getText();
-        String amaterno = aMaternoField.getText();
         String apaterno = aPaternoField.getText();
+        String amaterno = aMaternoField.getText();
         String correo = correoField.getText();
 
         Object sexoSelected = sexoCombo.getSelectedItem(); 
@@ -111,7 +114,7 @@ public class Formulario implements ActionListener{
 
         	if (nombre.equals("")||amaterno.equals("")||apaterno.equals("")||correoField.equals("")||sexo.equals("")){
 
-                JOptionPane.showMessageDialog(framePrincipal,"No Se Admiten Campos Vacios","Alerta",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(framePrincipal,"Hay Campos Vacios","Warning",JOptionPane.ERROR_MESSAGE);
 
             } else {
 
@@ -120,10 +123,59 @@ public class Formulario implements ActionListener{
                     BD.Conexion enlaceDB = new  BD.Conexion();
                     enlaceDB.conectarDB();
                     ResultSet resultSet = enlaceDB.consulta("call sp_postDatosPersonales('"+nombre+"','"+apaterno+"','"+amaterno+"','"+correo+"','"+sexo+"');");
+                    System.out.println("Dado de alta con exito");
                     
                 } catch(SQLException exx){
 
                     System.out.println(exx);
+                }
+                
+                try{
+                    
+                    Element elemento = new Element ("Datos_Personales");
+                    elemento.detach();
+                    Document doc = new Document(elemento);
+                    
+                    Element nombreElement= new Element("nombre");
+                    nombreElement.addContent(new Element("nombre_id").setText("1"));
+                    nombreElement.addContent(new Element("nombre_content").setText(nombre));
+                    
+                    doc.getRootElement().addContent(nombreElement);
+
+                    Element apaternoElement= new Element("apaterno");
+                    apaternoElement.addContent(new Element("apaterno_id").setText("2"));
+                    apaternoElement.addContent(new Element("apaterno_content").setText(apaterno));
+                    
+                    doc.getRootElement().addContent(apaternoElement);
+
+                    Element amaternoElement= new Element("amaterno");
+                    amaternoElement.addContent(new Element("amaterno_id").setText("3"));
+                    amaternoElement.addContent(new Element("amaterno_content").setText(amaterno));
+                    
+                    doc.getRootElement().addContent(amaternoElement);
+
+                    Element correoElement= new Element("correo");
+                    correoElement.addContent(new Element("correo_id").setText("4"));
+                    correoElement.addContent(new Element("correo_content").setText(correo));
+                    
+                    doc.getRootElement().addContent(correoElement);
+
+                    Element sexoElement= new Element("sexo");
+                    sexoElement.addContent(new Element("sexo_id").setText("5"));
+                    sexoElement.addContent(new Element("sexo_content").setText(sexo));
+                    
+                    doc.getRootElement().addContent(sexoElement);
+                    
+                    XMLOutputter xmlOutput = new XMLOutputter();
+
+                    xmlOutput.setFormat(Format.getPrettyFormat());
+                    xmlOutput.output(doc, new FileWriter("Datos.xml"));
+
+                    System.out.println("Pum Paps Archivo Guardado");
+
+                } catch (Exception io) {
+                    
+                    System.out.println(io.getMessage());
                 }
             }
         }
