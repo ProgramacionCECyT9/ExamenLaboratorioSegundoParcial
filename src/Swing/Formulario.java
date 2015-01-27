@@ -61,19 +61,19 @@ public class Formulario implements ActionListener{
         sexoLabel.setBounds(50,250,130,13);
         contenedor.add(sexoLabel);
 
-        aMaternoField.setBounds(220,95,200,20);
+        aMaternoField.setBounds(220,93,200,25);
         contenedor.add(aMaternoField);
 
-        aPaternoField.setBounds(220,145,200,20);
+        aPaternoField.setBounds(220,143,200,25);
         contenedor.add(aPaternoField);
 
-        nombreField.setBounds(220,45,200,20);
+        nombreField.setBounds(220,43,200,25);
         contenedor.add(nombreField);
 
-        sexoCombo.setBounds(220,245,200,20);
+        sexoCombo.setBounds(220,243,200,25);
         contenedor.add(sexoCombo);
 
-        correoField.setBounds(220,195,200,20);
+        correoField.setBounds(220,193,200,25);
         contenedor.add(correoField);
 
         enviarButton.setBounds(100,300,300,30);
