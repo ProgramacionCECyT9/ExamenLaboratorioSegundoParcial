@@ -36,6 +36,3 @@ DELIMITER %%
 insert into genero(genero) values("Masculino");
 insert into genero(genero) values("Femenino");
 insert into genero(genero) values("Indefinido");
-
-
-

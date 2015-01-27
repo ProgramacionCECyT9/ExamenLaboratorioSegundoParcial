@@ -48,10 +48,10 @@ public class Formulario implements ActionListener{
         framePrincipal.setResizable(false);
         framePrincipal.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        aMaternoLabel.setBounds(50,100,130,13);
+        aPaternoLabel.setBounds(50,100,130,13);
         contenedor.add(aMaternoLabel);
 
-        aPaternoLabel.setBounds(50,150,130,13);
+        aMaternoLabel.setBounds(50,150,130,13);
         contenedor.add(aPaternoLabel);
 
         correoLabel.setBounds(50,200,150,13);
@@ -63,10 +63,10 @@ public class Formulario implements ActionListener{
         sexoLabel.setBounds(50,250,130,13);
         contenedor.add(sexoLabel);
 
-        aMaternoField.setBounds(220,93,200,25);
+        aPaternoField.setBounds(220,93,200,25);
         contenedor.add(aMaternoField);
 
-        aPaternoField.setBounds(220,143,200,25);
+        aMaternoField.setBounds(220,143,200,25);
         contenedor.add(aPaternoField);
 
         nombreField.setBounds(220,43,200,25);
