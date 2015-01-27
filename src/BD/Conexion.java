@@ -24,7 +24,7 @@ public class Conexion {
    
         this.userBD = "root";
         this.passwordBD = "meji@r@mirez123";
-        this.urlBD = "jdbc:mysql://127.0.0.1:3306/datos_personales";
+        this.urlBD = "jdbc:mysql://127.0.0.1:3306/examen_segundo_parcial";
         this.driverClassName = "com.mysql.jdbc.Driver";
     }
     

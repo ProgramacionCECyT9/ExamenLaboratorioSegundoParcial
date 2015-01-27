@@ -1,12 +1,41 @@
-create database examen_segundo_parcial;
-use examen_segundo_parcial;
+CREATE DATABASE examen_segundo_parcial;
+USE examen_segundo_parcial;
 
 CREATE TABLE `examen_segundo_parcial`.`datos` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(45) NOT NULL,
+  `apaterno` VARCHAR(45) NOT NULL,
   `amaterno` VARCHAR(45) NOT NULL,
-  `datoscol` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
   `sexo` VARCHAR(45) NULL,
   PRIMARY KEY (`id`));
+
+CREATE TABLE `examen_segundo_parcial`.`genero` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `genero` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+DELIMITER //
+	CREATE PROCEDURE `sp_postDatosPersonales`(
+		nombrex VARCHAR(40),apaternox VARCHAR(40),amaternox VARCHAR(40),
+		emailx VARCHAR(40),sexox VARCHAR(40))
+	BEGIN
+		INSERT INTO datos(nombre,apaterno,amaterno,email,
+		sexo) 
+		VALUES (nombrex,apaternox,amaternox,emailx,sexox);
+	END
+// Delimiter ;
+
+DELIMITER %% 
+	CREATE PROCEDURE `sp_getGenero`()
+	BEGIN
+		select genero from genero;
+	END %%
+%% DELIMITER ;
+
+insert into genero(genero) values("Masculino");
+insert into genero(genero) values("Femenino");
+insert into genero(genero) values("Indefinido");
+
+
 

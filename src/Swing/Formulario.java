@@ -82,18 +82,18 @@ public class Formulario implements ActionListener{
 
         BD.Conexion enlaceDB = new  BD.Conexion();
         
-        // try{
+        try{
             
-        //     enlaceDB.conectarDB();
-        //     ResultSet rsSexo = enlaceDB.consulta("call sp_getGenero()"); 
+            enlaceDB.conectarDB();
+            ResultSet rsSexo = enlaceDB.consulta("call sp_getGenero()"); 
             
-        //     while(rsSexo.next()){
-        //         sexoCombo.addItem(rsSexo.getString("genero"));
-        //     }
+            while(rsSexo.next()){
+                sexoCombo.addItem(rsSexo.getString("genero"));
+            }
 
-        // } catch(SQLException exx){
-        //     System.out.println(exx);
-        // }
+        } catch(SQLException exx){
+            System.out.println(exx);
+        }
     }
 
     @Override
@@ -119,7 +119,7 @@ public class Formulario implements ActionListener{
 
                     BD.Conexion enlaceDB = new  BD.Conexion();
                     enlaceDB.conectarDB();
-                    ResultSet resultSet = enlaceDB.consulta("");
+                    ResultSet resultSet = enlaceDB.consulta("call sp_postDatosPersonales('"+nombre+"','"+apaterno+"','"+amaterno+"','"+correo+"','"+sexo+"');");
                     
                 } catch(SQLException exx){
 
